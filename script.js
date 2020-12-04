@@ -1,5 +1,5 @@
-let b = document.querySelector(".bruh");   
-  let butt = document.querySelector(".hehe")
+let pclass = document.querySelector(".p-class");   
+  let button1 = document.querySelector(".button1")
    
 
    
@@ -32,7 +32,7 @@ console.log(data.val().Character);
 
 });
 
-butt.addEventListener("click",() => {
+button1.addEventListener("click",() => {
   database.remove();
  
     location.reload();
