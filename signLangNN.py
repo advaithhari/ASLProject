@@ -6,9 +6,9 @@ import matplotlib.pyplot as plt
 from tensorflow.keras import layers
 import pandas as pd
 
-batch_size = 64
-img_height = 200
-img_width = 200
+batch_size = 16
+img_height = 28
+img_width = 28
 
 
 #data_dir = pathlib.Path("/home/jetsonnano/tensorTests/sign-language-alphabet-recognizer/dataset/")
@@ -57,7 +57,6 @@ train = train/255 #normalize
 train = train.reshape(27455,28,28,1) # originally should be 27455, 784 for single pixel, we reshape into images
 
 model = tf.keras.Sequential([
-  layers.experimental.preprocessing.Resizing(28,28),
   layers.experimental.preprocessing.RandomZoom(.3, .3),
   layers.experimental.preprocessing.RandomRotation(.1),
   layers.Conv2D(32, 3, padding='same',  activation='relu'),
@@ -67,7 +66,8 @@ model = tf.keras.Sequential([
   layers.Conv2D(128, 3,padding='same',  activation='relu'),
   layers.MaxPooling2D(),
   layers.Flatten(),
-  layers.Dense(512, activation='relu'),
+  layers.Dense(256, activation='relu'),
+  layers.Dense(64, activation='relu'),
   layers.Dense(num_classes,activation='softmax')
 ])
 
@@ -81,32 +81,8 @@ model.fit(
   train,
   labels,
   validation_split=0.25,
-  epochs=5
+  epochs=12,
+  batch_size=batch_size
 )
 model.save("thirdSignLangNNModel")
-
-acc = history.history['accuracy']
-val_acc = history.history['val_accuracy']
-
-loss = history.history['loss']
-val_loss = history.history['val_loss']
-
-epochs_range = range(epochs)
-
-plt.figure(figsize=(8, 8))
-plt.subplot(1, 2, 1)
-plt.plot(epochs_range, acc, label='Training Accuracy')
-plt.plot(epochs_range, val_acc, label='Validation Accuracy')
-plt.legend(loc='lower right')
-plt.title('Training and Validation Accuracy')
-
-plt.subplot(1, 2, 2)
-plt.plot(epochs_range, loss, label='Training Loss')
-plt.plot(epochs_range, val_loss, label='Validation Loss')
-plt.legend(loc='upper right')
-plt.title('Training and Validation Loss')
-plt.show()
-
-
-
 
