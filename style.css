@@ -1,3 +1,11 @@
 h1{
     color: goldenrod   
    }
+   .carousel {
+    width:960px;
+    height:360px;
+    margin: auto;
+  }
+  .navbar-brand {
+      font-size: larger;
+  }
