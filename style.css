@@ -8,4 +8,33 @@ h1{
   }
   .navbar-brand {
       font-size: larger;
+      
   }
+  nav ul {
+    padding: 0;
+    display: flex;
+   align-items: right;
+    justify-content: space-between;
+    list-style-type: none;
+    
+
+  }
+nav li a {
+    font-family: Verdana;
+    font-size: 16px;
+    text-decoration: none;
+    padding: 50px;
+    margin-left: 100%;
+
+}
+.container {
+width: auto;
+}
+.navbar-custom { 
+    background-color: lemonchiffon; 
+} 
+hr { 
+    margin-top: 0%;
+    border-top: 25px solid rgba(0, 0, 0, 0.1);
+    background-color: goldenrod;
+}
