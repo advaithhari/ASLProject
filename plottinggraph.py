@@ -7,60 +7,113 @@ import matplotlib.pyplot as plt
 from tensorflow.keras import layers
 from tensorflow import keras
 import pandas as pd
-
+import imutils
 # data = pd.read_csv('sign_mnist_train.csv')
 
 # train=data.values[0:,1:] # all columns 0->n, all rows 1->k
-# labels = data.values[0:,0] #all columns 0->n, 0th row
+# # labels = data.values[0:,0] #all columns 0->n, 0th row
 
 
 # train = train.reshape(27455,28,28,1) # originally should be 27455, 784 for single pixel, we reshape into images
 
+img_width = 72
+img_height = 100
+num_channels = 3 
 
 
 cap = cv2.VideoCapture(0)
 
-while(True):
-    # Capture frame-by-frame
+
+def resize(image,desired_final_size_width,desired_final_size_height): 
+    old_size = image.shape[:2] # old_size is in (height, width) format
+    desired_size = max(old_size)
+   # print("old size")
+    print(old_size)
+    ratio = float(desired_final_size_width)/max(old_size)
+    
+    print("ratio "+ str(ratio))
+
+    new_size = tuple([int(x*ratio) for x in old_size])
+    print("new size 0"  + str(new_size[0]) + " new size 1 " + str(new_size[1]))
+    print(new_size)
+    # new_size should be in (width, height) format
+    
+    image = cv2.resize(image, (new_size[1], new_size[0]))
+
+    delta_w = desired_final_size_width - new_size[1]
+    delta_h = desired_final_size_height - new_size[0]
+    top, bottom = delta_h//2, delta_h-(delta_h//2)
+    left, right = delta_w//2, delta_w-(delta_w//2)
+    print("top " + str(top)  + " bottom " + str(bottom) + " left " + str(left) + " right " + str(right))
+    color = [128, 128, 128]
+    new_image = cv2.copyMakeBorder(image, top, bottom, left, right, cv2.BORDER_CONSTANT,
+        value=color)
+    resized_size = new_image.shape[:2] # old_size is in (height, width) format
+    print(resized_size)
+    #print("resized")
+    #print(resized_size)
+   # new_image = cv2.resize(new_image,(desired_final_size_width, desired_final_size_height))
+   # final_resized_size = new_image.shape[:2] # old_size is in (height, width) format
+    #print("final resize")
+    #print(final_resized_size)
+    return new_image
+
+def medianMat(Input, nVals):
+  
+    range[0, nVals ]
+    histRange = { range }
+    uniform = true
+    accumulate = false
+    hist = cv2.Mat()
+    cv2.calcHist(Input, 1, 0, cv2.Mat(), hist, 1, nVals, histRange, uniform, accumulate)
+    
+    
+    cdf = cv2.Mat()
+    hist.copyTo(cdf)
+    for x in nVals-1:
+        cdf.at<float>(i) += cdf.at<float>(i - 1);
+    
+    cdf /= Input.total()
+
+   
+     double medianVal
+     for i in nVals-1: 
+    if (cdf.at<float>(i) >= 0.5) { medianVal = i;  break; }
+     
+     return medianVal/nVals
+
+
+while(cap.isOpened()):
     ret, frame = cap.read()
+    original = frame
+    
+    print(frame.shape[:2])
+    
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    frame = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
+    frame = resize(frame,img_width*4, img_height*4)
+    
+    print("hi")
+    
+    cv2.imshow('original',original)
+    cv2.imshow('frame', frame)
+      
+    frame = cv2.resize(frame,(img_width,img_height))
 
-    # Our operations on the frame come here
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    print("final shape : " + str(frame.shape[:2])) 
 
-    # Display the resulting frame
-    cv2.imshow('frame',gray)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
-        
-   
-    nummm = 130
 
-    plt.imshow(train[nummm].reshape((28,28)))
-    plt.show()
-    #plt.imshow(train[1].reshape((28,28)))
-    save_path = "thirdSignLangNNModel"
+    save_path = "numbersSignLangNNModel2"
 
     saved_model = keras.models.load_model(save_path)
 
-  #  res=saved_model.predict(train.reshape(27455,28,28,1))
+    
+    prediction1 = saved_model.predict(tf.cast(tf.reshape(frame,[1,img_height,img_width,num_channels]),dtype='float32'))
+    
+    print(prediction1)
 
-    rz= saved_model.predict(tf.cast(tf.reshape(frame,[1,28,28,1]),dtype='float32'))
-
-    rz = list(rz[nummm])
-
-   # res =list(res[nummm])
-   # mx=max(res)
-
-    mz =max(rz)
-
-    print(rz.index(mz))
- #   print(res.index(mx))
-  #  print(labels[nummm])
-
-
-
-# When everything done, release the capture
+    # When everything done, release the capture
 cap.release()
 cv2.destroyAllWindows()
-
-
