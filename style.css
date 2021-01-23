@@ -1,5 +1,10 @@
 h1{
-    color: goldenrod   
+    text-align: center;  
+    /*color: goldenrod */
+    font-family: Verdana;
+    font-size: 50px;
+    padding: 20px;
+    color: burlywood;
    }
    .carousel {
     width:960px;
@@ -13,27 +18,46 @@ h1{
   nav ul {
     padding: 0;
     display: flex;
-   align-items: right;
+    align-items: right;
     justify-content: space-between;
     list-style-type: none;
-    
+   margin-right: 15%;
 
   }
 nav li a {
     font-family: Verdana;
     font-size: 16px;
     padding: 50px;
-    margin-left: 100%;
-
 }
+nav li a:hover {
+    color: goldenrod;
+}
+
 .container {
 width: auto;
 }
 .navbar-custom { 
     background-color: lemonchiffon; 
+    height: 170px;
 } 
 hr { 
     margin-top: 0%;
     border-top: 25px solid rgba(0, 0, 0, 0.1);
     background-color: goldenrod;
+}
+.row {
+    display: flex;
+  }
+  
+.column {
+    flex: 25%;
+    padding: 5px;
+  }
+  .img {
+    width:  100px;
+    height: 100px;
+    background-size: cover;
+}
+body{
+    overflow-x:hidden;
 }
