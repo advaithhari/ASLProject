@@ -16,19 +16,25 @@ import imutils
 
 # train = train.reshape(27455,28,28,1) # originally should be 27455, 784 for single pixel, we reshape into images
 
-img_width = 72
-img_height = 100
+img_width = 100
+img_height = 58
 num_channels = 3 
 
 
 cap = cv2.VideoCapture(0)
 
 
-def resize(image,desired_final_size_width,desired_final_size_height): 
+def resize(image,desired_final_size_width,desired_final_size_height): #resize method we made
     old_size = image.shape[:2] # old_size is in (height, width) format
     desired_size = max(old_size)
-   # print("old size")
+    print("old size")
     print(old_size)
+    print("old size hello")
+    print("test test")
+    meanBorder = calcMeanOfBorder(image, old_size[0], old_size[1])
+    print("mean of border " + str(meanBorder))
+    color = [int(meanBorder),int(meanBorder),int(meanBorder)]
+    
     ratio = float(desired_final_size_width)/max(old_size)
     
     print("ratio "+ str(ratio))
@@ -38,17 +44,20 @@ def resize(image,desired_final_size_width,desired_final_size_height):
     print(new_size)
     # new_size should be in (width, height) format
     
-    image = cv2.resize(image, (new_size[1], new_size[0]))
+    image = cv2.resize(image, (new_size[1], new_size[0])) 
 
     delta_w = desired_final_size_width - new_size[1]
     delta_h = desired_final_size_height - new_size[0]
     top, bottom = delta_h//2, delta_h-(delta_h//2)
     left, right = delta_w//2, delta_w-(delta_w//2)
     print("top " + str(top)  + " bottom " + str(bottom) + " left " + str(left) + " right " + str(right))
-    color = [128, 128, 128]
+
+    #color = [128,128,128]
+
     new_image = cv2.copyMakeBorder(image, top, bottom, left, right, cv2.BORDER_CONSTANT,
         value=color)
     resized_size = new_image.shape[:2] # old_size is in (height, width) format
+    print("final size")
     print(resized_size)
     #print("resized")
     #print(resized_size)
@@ -57,31 +66,21 @@ def resize(image,desired_final_size_width,desired_final_size_height):
     #print("final resize")
     #print(final_resized_size)
     return new_image
-
-def medianMat(Input, nVals):
-  
-    range[0, nVals ]
-    histRange = { range }
-    uniform = true
-    accumulate = false
-    hist = cv2.Mat()
-    cv2.calcHist(Input, 1, 0, cv2.Mat(), hist, 1, nVals, histRange, uniform, accumulate)
-    
-    
-    cdf = cv2.Mat()
-    hist.copyTo(cdf)
-    for x in nVals-1:
-        cdf.at<float>(i) += cdf.at<float>(i - 1);
-    
-    cdf /= Input.total()
-
-   
-     double medianVal
-     for i in nVals-1: 
-    if (cdf.at<float>(i) >= 0.5) { medianVal = i;  break; }
-     
-     return medianVal/nVals
-
+def calcMeanOfBorder(image1,height,width):
+    sumOfBorderPixels = (0,0,0); 
+    counter = 0
+    for i in range(int(width/8)) :
+        for j in range(int(height/8)) :
+            sumOfBorderPixels+=image1[i,j]
+            #print("image 1 i, j value " + str(image1[i,j]))
+            #print(str(sumOfBorderPixels))
+            tempJ = width-j-1
+            tempI = height-i-1
+            sumOfBorderPixels+=image1[tempI,tempJ]
+            counter+=2
+          #  print("image 1 tempI, tempJ val " + str(image1[tempI,tempJ]))
+          #  print("sum of border pixels two val " + str(sumOfBorderPixels))
+    return sumOfBorderPixels[0]/counter
 
 while(cap.isOpened()):
     ret, frame = cap.read()
@@ -91,7 +90,7 @@ while(cap.isOpened()):
     
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     frame = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
-    frame = resize(frame,img_width*4, img_height*4)
+    frame = cv2.resize(frame,(img_height*4, img_width*4))
     
     print("hi")
     
@@ -105,7 +104,7 @@ while(cap.isOpened()):
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-    save_path = "numbersSignLangNNModel2"
+    save_path = "numbersSignLangNNModel4"
 
     saved_model = keras.models.load_model(save_path)
 
