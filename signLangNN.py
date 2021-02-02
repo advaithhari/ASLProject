@@ -11,7 +11,7 @@ from tensorflow.python.keras.layers.preprocessing.image_preprocessing import Res
 batch_size = 16
 
 img_height  = 100
-img_width = 72
+img_width = 58
 
 
 data_dir = pathlib.Path("numbersDataset/")
@@ -86,5 +86,5 @@ model.fit(
   epochs=6,
   batch_size=batch_size
 )
-model.save("numbersSignLangNNModel3")
+model.save("numbersSignLangNNModel4")
 
