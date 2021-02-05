@@ -8,8 +8,20 @@ h1{
    }
    .carousel {
     width:960px;
-    height:360px;
     margin: auto;
+  }
+  .w-100 {
+    width: 100% !important;
+    height: 75vh;
+  }
+  .carousel-inner > .item > img {
+    width:960px;
+    height:500px;
+  }
+  .carousel-table {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0;
   }
   .navbar-brand {
       font-size: larger;
@@ -44,6 +56,7 @@ hr {
     margin-top: 0%;
     border-top: 25px solid rgba(0, 0, 0, 0.1);
     background-color: goldenrod;
+    margin-bottom: 0%;
 }
 .row {
     display: flex;
@@ -72,5 +85,6 @@ body{
 #videoElement {
 	width: 500px;
 	height: 375px;
-	background-color: #666;
+    background-color: #666;
+
 }
