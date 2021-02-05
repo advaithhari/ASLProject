@@ -97,17 +97,18 @@ image1 = resize(image1,img_width, img_height)#using our resize function and inpu
 image2 = resize(image2,img_width, img_height)
 image3 = resize(image3,img_width, img_height)
 
-cv2.imshow("imgage 1",image1)
-cv2.imshow("imgage 2",image2)
-cv2.imshow("imgage 3",image3)
+#cv2.imshow("imgage 1",image1)
+#cv2.imshow("imgage 2",image2)
+#cv2.imshow("imgage 3",image3)
 
 
 
 cv2.waitKey(0)
 
-save_path = "numbersSignLangNNModel4"
+#save_path = "numbersSignLangNNModel4"
+save_path  = "/numbersSignLangNNModel4"
 
-saved_model = keras.models.load_model(save_path) #loading our model in
+saved_model = keras.models.load_model("/numbersSignLangNNModel4") #loading our model in
 
 prediction1 = saved_model.predict(tf.cast(tf.reshape(image1,[1,img_height,img_width,num_channels]),dtype='float32')) #getting the accuracy values as an array
 #print("DS 8 ")
