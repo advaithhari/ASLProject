@@ -4,33 +4,20 @@ let pclass = document.querySelector(".p-class");
 
    
    
-   // Your web app's Firebase configuration
-   var firebaseConfig = {
-    apiKey: "AIzaSyDiEMKFF3n5hSDBb6xLsXoHclz_6bK_9wk",
-    authDomain: "aslproject-7fabb.firebaseapp.com",
-    databaseURL: "https://aslproject-7fabb.firebaseio.com",
-    projectId: "aslproject-7fabb",
-    storageBucket: "aslproject-7fabb.appspot.com",
-    messagingSenderId: "4437569972",
-    appId: "1:4437569972:web:70d9da46cbd6d2f97e42e1"
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyBli-KhJRDRa-fnWyeSIELr1mMZ4K6n2RE",
+    authDomain: "projectasl.firebaseapp.com",
+    projectId: "projectasl",
+    storageBucket: "projectasl.appspot.com",
+    messagingSenderId: "942372278020",
+    appId: "1:942372278020:web:038cb7d411e2dbcb45ca51",
+    measurementId: "G-9942EW0HYY"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-
-  let database = firebase.database().ref();
-  console.log(database);
-
-  database.on('child_added', (data) => {
-let h = document.createElement("p");
-
-
-console.log(data.val().Character);
- h.innerHTML  = data.val().Character;
-  document.body.appendChild(h);
-
-
-
-});
+  firebase.analytics();
 
 button1.addEventListener("click",() => {
   database.remove();
@@ -50,11 +37,11 @@ if (navigator.mediaDevices.getUserMedia) {
       console.log("Something went wrong!");
     });
 }
-
+let frames ;
 function stop() {
   var stream = video.srcObject;
   var tracks = stream.getTracks();
-
+  frames = stream;
   for (var i = 0; i < tracks.length; i++) {
     var track = tracks[i];
     track.stop();
@@ -62,3 +49,24 @@ function stop() {
 
   video.srcObject = null;
 }
+
+
+let database = firebase.database().ref();
+console.log(database);
+
+database.on('child_added', (data) => {
+let h = document.createElement("p");
+
+
+console.log(data.val().Character);
+h.innerHTML  = data.val().Character;
+document.body.appendChild(h);
+
+value = {
+  frame: frame
+
+}
+console.log
+database.push(value);
+
+});
