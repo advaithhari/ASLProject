@@ -31,34 +31,45 @@ console.log(data.val().Character);
 
 
 });
+var video = document.getElementById('video');
 
-button1.addEventListener("click",() => {
-  database.remove();
- stop();
-   
-
-});
-
-var video = document.querySelector("#videoElement");
-
-if (navigator.mediaDevices.getUserMedia) {
-  navigator.mediaDevices.getUserMedia({ video: true })
-    .then(function (stream) {
-      video.srcObject = stream;
-    })
-    .catch(function (err0r) {
-      console.log("Something went wrong!");
+// Get access to the camera!
+if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    // Not adding `{ audio: true }` since we only want video now
+    navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+        //video.src = window.URL.createObjectURL(stream);
+        video.srcObject = stream;
+        video.play();
     });
 }
 
-function stop() {
-  var stream = video.srcObject;
-  var tracks = stream.getTracks();
+// button1.addEventListener("click",() => {
+//   database.remove();
+//  stop();
+   
 
-  for (var i = 0; i < tracks.length; i++) {
-    var track = tracks[i];
-    track.stop();
-  }
+// });
 
-  video.srcObject = null;
-}
+// var video = document.querySelector("#videoElement");
+
+// if (navigator.mediaDevices.getUserMedia) {
+//   navigator.mediaDevices.getUserMedia({ video: true })
+//     .then(function (stream) {
+//       video.srcObject = stream;
+//     })
+//     .catch(function (err0r) {
+//       console.log("Something went wrong!");
+//     });
+// }
+
+// function stop() {
+//   var stream = video.srcObject;
+//   var tracks = stream.getTracks();
+
+//   for (var i = 0; i < tracks.length; i++) {
+//     var track = tracks[i];
+//     track.stop();
+//   }
+
+//   video.srcObject = null;
+// }
