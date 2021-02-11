@@ -19,59 +19,43 @@ let pclass = document.querySelector(".p-class");
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
 
-button1.addEventListener("click",() => {
-  database.remove();
- stop();
-   
-
-});
-
-var video = document.querySelector("#videoElement");
-
-if (navigator.mediaDevices.getUserMedia) {
-  navigator.mediaDevices.getUserMedia({ video: true })
-    .then(function (stream) {
-      video.srcObject = stream;
-    })
-    .catch(function (err0r) {
-      console.log("Something went wrong!");
+// Get access to the camera!
+if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    // Not adding `{ audio: true }` since we only want video now
+    navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+        //video.src = window.URL.createObjectURL(stream);
+        video.srcObject = stream;
+        video.play();
     });
 }
-let frames ;
-function stop() {
-  var stream = video.srcObject;
-  var tracks = stream.getTracks();
-  frames = stream;
-  for (var i = 0; i < tracks.length; i++) {
-    var track = tracks[i];
-    track.stop();
-  }
 
-  video.srcObject = null;
-}
+// button1.addEventListener("click",() => {
+//   database.remove();
+//  stop();
+   
 
+// });
 
-let database = firebase.database().ref();
-console.log(database);
+// var video = document.querySelector("#videoElement");
 
-database.on('child_added', (data) => {
-let h = document.createElement("p");
+// if (navigator.mediaDevices.getUserMedia) {
+//   navigator.mediaDevices.getUserMedia({ video: true })
+//     .then(function (stream) {
+//       video.srcObject = stream;
+//     })
+//     .catch(function (err0r) {
+//       console.log("Something went wrong!");
+//     });
+// }
 
+// function stop() {
+//   var stream = video.srcObject;
+//   var tracks = stream.getTracks();
 
-console.log(data.val().Character);
-h.innerHTML  = data.val().Character;
-document.body.appendChild(h);
+//   for (var i = 0; i < tracks.length; i++) {
+//     var track = tracks[i];
+//     track.stop();
+//   }
 
-value = {
-  frame: frame
-
-}
-console.log
-database.push(value);
-
-});
-
-
-var h = document.createElement("p");
-h.innerHTML = dataToSend;
-document.body.appendChild(h);
+//   video.srcObject = null;
+// }
