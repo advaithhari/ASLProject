@@ -1,7 +1,13 @@
 const express = require('express')
 const {spawn} = require('child_process');
+const http = require('http');
 const app = express()
 const port = 3000
+app.use('/assets', [
+    express.static(__dirname + '/node_modules/jquery/dist/'),
+    express.static(__dirname + '/node_modules/materialize-css/dist/'),
+    
+]);
 app.get('/', (req, res) => {
  
  var dataToSend;
@@ -16,6 +22,8 @@ app.get('/', (req, res) => {
  python.on('close', (code) => {
  console.log(`child process close all stdio with code ${code}`);
  // send data to browser
+ location.href = "localhost:3000?id="+dataToSend;
+
  console.log(dataToSend)
  res.send(dataToSend)
 

@@ -70,3 +70,8 @@ console.log
 database.push(value);
 
 });
+
+
+var h = document.createElement("p");
+h.innerHTML = dataToSend;
+document.body.appendChild(h);

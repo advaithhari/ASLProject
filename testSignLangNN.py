@@ -108,7 +108,7 @@ cv2.waitKey(0)
 #save_path = "numbersSignLangNNModel4"
 save_path  = "/numbersSignLangNNModel4"
 
-saved_model = keras.models.load_model("/numbersSignLangNNModel4") #loading our model in
+saved_model = keras.models.load_model("numbersSignLangNNModel4") #loading our model in
 
 prediction1 = saved_model.predict(tf.cast(tf.reshape(image1,[1,img_height,img_width,num_channels]),dtype='float32')) #getting the accuracy values as an array
 #print("DS 8 ")
