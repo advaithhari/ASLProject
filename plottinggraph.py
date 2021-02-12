@@ -6,8 +6,7 @@ import pathlib
 import matplotlib.pyplot as plt
 from tensorflow.keras import layers
 from tensorflow import keras
-import pandas as pd
-import imutils
+
 # data = pd.read_csv('sign_mnist_train.csv')
 
 # train=data.values[0:,1:] # all columns 0->n, all rows 1->k
@@ -81,39 +80,42 @@ cap = cv2.VideoCapture(0)
 #           #  print("image 1 tempI, tempJ val " + str(image1[tempI,tempJ]))
 #           #  print("sum of border pixels two val " + str(sumOfBorderPixels))
 #     return sumOfBorderPixels[0]/counter
-
 while(cap.isOpened()):
     ret, frame = cap.read()
-    original = frame
-    
-    print(frame.shape[:2])
-    
-    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    frame = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
-    frame = frame[0:400,232:232*2]
-    
-    
-    print("hi")
-    
-    cv2.imshow('original',original)
-    cv2.imshow('frame', frame)
       
-    frame = cv2.resize(frame,(img_width,img_height))
 
-    print("final shape : " + str(frame.shape[:2])) 
+    cv2.rectangle(frame,(230,0),(468,400),(255,0,0),2)
+    cv2.imshow('frame', frame)
+    if cv2.waitKey(1) & 0xFF == ord('e'):
+        original = frame
+        
+        
+        print(frame.shape[:2])
+        
+        frame = cv2.cvtColor(original, cv2.COLOR_BGR2GRAY)
+        frame = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
+        frame = frame[0:400,232:232*2]
+        
+        cv2.imshow('original',frame)        
+        print("hi")
+      
+        
+        frame = cv2.resize(frame,(img_width,img_height))
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+        print("final shape : " + str(frame.shape[:2])) 
+        
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            exit()
 
-    save_path = "numbersSignLangNNModel4"
+        save_path = "numbersSignLangNNModel4"
 
-    saved_model = keras.models.load_model(save_path)
+        saved_model = keras.models.load_model(save_path)
 
-    
-    prediction1 = saved_model.predict(tf.cast(tf.reshape(frame,[1,img_height,img_width,num_channels]),dtype='float32'))
-    
-    print(prediction1)
-
+        
+        prediction1 = saved_model.predict(tf.cast(tf.reshape(frame,[1,img_height,img_width,num_channels]),dtype='float32'))
+        prediction1
+        print(prediction1)
+        #print(prediction1)
     # When everything done, release the capture
 cap.release()
 cv2.destroyAllWindows()

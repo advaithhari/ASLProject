@@ -118,4 +118,5 @@ prediction2 = saved_model.predict(tf.cast(tf.reshape(image2,[1,img_height,img_wi
 #print(prediction2)
 prediction3 = saved_model.predict(tf.cast(tf.reshape(image3,[1,img_height,img_width,num_channels]),dtype='float32'))
 #print("FS 1 ")
-print(prediction3)
+#print(prediction3)
+print(prediction3[0][1])

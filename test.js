@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
  
  var dataToSend;
  // spawn new child process to call the python script
- const python = spawn('python', ['testSignLangNN.py']);
+ const python = spawn('python', ['plottinggraph.py']);
  // collect data from script
  python.stdout.on('data', function (data) {
   console.log('Pipe data from python script ...');
@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
  python.on('close', (code) => {
  console.log(`child process close all stdio with code ${code}`);
  // send data to browser
- location.href = "localhost:3000?id="+dataToSend;
+ //location.href = "localhost:3000?id="+dataToSend;
 
  console.log(dataToSend)
  res.send(dataToSend)
