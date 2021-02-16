@@ -17,7 +17,7 @@ from tensorflow import keras
 
 img_width = 58
 img_height = 100
-num_channels = 3 
+num_channels = 3
 
 
 cap = cv2.VideoCapture(0)
@@ -33,17 +33,17 @@ cap = cv2.VideoCapture(0)
 #     meanBorder = calcMeanOfBorder(image, old_size[0], old_size[1])
 #     print("mean of border " + str(meanBorder))
 #     color = [int(meanBorder),int(meanBorder),int(meanBorder)]
-    
+
 #     ratio = float(desired_final_size_width)/max(old_size)
-    
+
 #     print("ratio "+ str(ratio))
 
 #     new_size = tuple([int(x*ratio) for x in old_size])
 #     print("new size 0"  + str(new_size[0]) + " new size 1 " + str(new_size[1]))
 #     print(new_size)
 #     # new_size should be in (width, height) format
-    
-#     image = cv2.resize(image, (new_size[1], new_size[0])) 
+
+#     image = cv2.resize(image, (new_size[1], new_size[0]))
 
 #     delta_w = desired_final_size_width - new_size[1]
 #     delta_h = desired_final_size_height - new_size[0]
@@ -66,7 +66,7 @@ cap = cv2.VideoCapture(0)
 #     #print(final_resized_size)
 #     return new_image
 # def calcMeanOfBorder(image1,width,height):
-#     sumOfBorderPixels = (0,0,0); 
+#     sumOfBorderPixels = (0,0,0);
 #     counter = 0
 #     for i in range(int(width/8)) :
 #         for j in range(int(height/8)) :
@@ -82,28 +82,25 @@ cap = cv2.VideoCapture(0)
 #     return sumOfBorderPixels[0]/counter
 while(cap.isOpened()):
     ret, frame = cap.read()
-      
 
-    cv2.rectangle(frame,(230,0),(468,400),(255,0,0),2)
+    cv2.rectangle(frame, (230, 0), (468, 400), (255, 0, 0), 2)
     cv2.imshow('frame', frame)
     if cv2.waitKey(1) & 0xFF == ord('e'):
         original = frame
-        
-        
+
         print(frame.shape[:2])
-        
+
         frame = cv2.cvtColor(original, cv2.COLOR_BGR2GRAY)
         frame = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
-        frame = frame[0:400,232:232*2]
-        
-        cv2.imshow('original',frame)        
-        print("hi")
-      
-        
-        frame = cv2.resize(frame,(img_width,img_height))
+        frame = frame[0:400, 232:232*2]
 
-        print("final shape : " + str(frame.shape[:2])) 
-        
+        cv2.imshow('original', frame)
+        print("hi")
+
+        frame = cv2.resize(frame, (img_width, img_height))
+
+        print("final shape : " + str(frame.shape[:2]))
+
         if cv2.waitKey(1) & 0xFF == ord('q'):
             exit()
 
@@ -111,11 +108,11 @@ while(cap.isOpened()):
 
         saved_model = keras.models.load_model(save_path)
 
-        
-        prediction1 = saved_model.predict(tf.cast(tf.reshape(frame,[1,img_height,img_width,num_channels]),dtype='float32'))
+        prediction1 = saved_model.predict(tf.cast(tf.reshape(
+            frame, [1, img_height, img_width, num_channels]), dtype='float32'))
         prediction1
         print(prediction1)
-        #print(prediction1)
+        # print(prediction1)
     # When everything done, release the capture
 cap.release()
 cv2.destroyAllWindows()
