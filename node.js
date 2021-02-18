@@ -8,6 +8,7 @@ const app = express()
 const port = 5621
 var useMulter = multer();
 app.post('/uploadUserBook',useMulter.any(),(req,res)=>{
+    console.log("reached upload user book post request")
     if(req.files.length>0){
         console.log(req.files[0].buffer.length);
         console.log(req.files[0]);

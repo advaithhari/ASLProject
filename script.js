@@ -135,7 +135,7 @@
 
                 var xhr = new XMLHttpRequest();
                 
-                xhr.open('POST', 'https://exchange.peddie.org/signLanguage/uploadUserImage', true);
+                xhr.open('POST', 'https://exchange.peddie.org/signLanguage/uploadUserBook', true);
                 console.log("hello console from add");
                 xhr.timeout=15000;//added ten second timeout 
                 
@@ -147,11 +147,10 @@
                     
                     $.post('https://exchange.peddie.org/nodejs/reportFrontEndError',{error:"code67",variables:variablesJson});
                     
-                    window.location.replace("https://exchange.peddie.org/Sellerpage.html");
+                  //  window.location.replace("https://exchange.peddie.org/Sellerpage.html");
                 }
                 xhr.onload = function(){
                     
-                    window.location.replace("https://exchange.peddie.org/Sellerpage.html");
                     alert("sucessfully added book");
                 }
                 xhr.onerror = function () {
@@ -161,7 +160,7 @@
                     
                     $.post('https://exchange.peddie.org/nodejs/reportFrontEndError',{error:'code68',variables:variablesJson});
                     
-                    window.location.replace("https://exchange.peddie.org/Sellerpage.html");
+                   // window.location.replace("https://exchange.peddie.org/Sellerpage.html");
                 };
 
                 xhr.send(formData);

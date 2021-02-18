@@ -107,3 +107,6 @@ body {
   display: flex;
  flex-direction: row;
 }
+.frame-border { 
+  border:8px solid rgb(248, 211, 46); 
+  }
