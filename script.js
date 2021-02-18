@@ -1,4 +1,4 @@
-(function () {
+
   // The width and height of the captured photo. We will set the
   // width to the value defined here, but the height will be
   // calculated based on the aspect ratio of the input stream.
@@ -87,7 +87,10 @@
       canvas.width = width;
       canvas.height = height;
       console.log(video.src)
-      context.drawImage(video, 0, 0, width, height);
+      context.drawImage(video,0, 0, width, height);
+      let output = canvas.toDataURL('image/png'); 
+      send(output,"test")
+      return output;
     } else {
       clearphoto();
     }
@@ -96,4 +99,45 @@
   // Set up our event listener to run the startup process
   // once loading is complete.
   window.addEventListener('load', startup, false);
-})();
+  function send(image,fileName){
+    var fileName =  $('#userBookImageName').html();
+
+                var formData = new FormData();
+                
+                formData.append('userImage',image,fileName);
+                
+                // formData.append('userBookImage',document.getElementById().files[0],fileName);
+
+                var xhr = new XMLHttpRequest();
+                
+                xhr.open('POST', 'https://exchange.peddie.org/signLanguage/uploadUserImage', true);
+                console.log("hello console from add");
+                xhr.timeout=15000;//added ten second timeout 
+                
+                xhr.ontimeout = function(){
+                    alert("error code #67, image upload timed out, please report this to compsciclub@peddie.org");
+                    
+                    var variablesJson=[];
+                    
+                    
+                    $.post('https://exchange.peddie.org/nodejs/reportFrontEndError',{error:"code67",variables:variablesJson});
+                    
+                    window.location.replace("https://exchange.peddie.org/Sellerpage.html");
+                }
+                xhr.onload = function(){
+                    
+                    window.location.replace("https://exchange.peddie.org/Sellerpage.html");
+                    alert("sucessfully added book");
+                }
+                xhr.onerror = function () {
+                    alert("error code #68, image upload failed, please report this to compsciclub@peddie.org");
+                    
+                    var variablesJson=[];
+                    
+                    $.post('https://exchange.peddie.org/nodejs/reportFrontEndError',{error:'code68',variables:variablesJson});
+                    
+                    window.location.replace("https://exchange.peddie.org/Sellerpage.html");
+                };
+
+                xhr.send(formData);
+  }

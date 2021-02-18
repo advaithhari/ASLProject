@@ -1,16 +1,16 @@
+const multer = require('multer');
 const express = require('express')
 const {
     spawn
 } = require('child_process');
 const http = require('http');
 const app = express()
-const port = 3000
-app.use('/assets', [
-    express.static(__dirname + '/node_modules/jquery/dist/'),
-    express.static(__dirname + '/node_modules/materialize-css/dist/'),
+const port = 5621
+var useMulter = multer();
+app.post('/uploadUserBook',useMulter.any(),(req,res)=>{
 
-]);
-app.get('/', (req, res) => {
+});
+app.get('/python', (req, res) => {
 
     var dataToSend;
     // spawn new child process to call the python script
