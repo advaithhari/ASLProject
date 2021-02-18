@@ -8,7 +8,10 @@ const app = express()
 const port = 5621
 var useMulter = multer();
 app.post('/uploadUserBook',useMulter.any(),(req,res)=>{
-
+    if(req.files.length>0){
+        console.log(req.files[0].buffer.length);
+        console.log(req.files[0]);
+    }
 });
 app.get('/python', (req, res) => {
 
