@@ -6,7 +6,7 @@ import pathlib
 import matplotlib.pyplot as plt
 from tensorflow.keras import layers
 from tensorflow import keras
-import sys;
+import sys
 img_width = 58
 img_height = 100
 num_channels = 3
