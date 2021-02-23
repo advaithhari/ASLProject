@@ -19,7 +19,7 @@ app.post('/uploadUserBook',useMulter.any(),(req,res)=>{
         const python = spawn('python', ['testSignLangNN.py']);
         console.log("this is updated version ")
         // collect data from script
-        python.stdout.on('data', function(data) {
+        python.stderr.on('data', function(data) {
             console.log(data.toString()); 
         });
         
