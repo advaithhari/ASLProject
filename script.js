@@ -23,9 +23,7 @@
     canvas = document.getElementById('canvas');
     startbutton = document.getElementById('startbutton');
 
-    function hide(){
-      videostop = document.getElementById('video').style.display = 'block';
-    }
+    
 
     navigator.mediaDevices.getUserMedia({
         video: true,

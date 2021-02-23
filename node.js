@@ -17,7 +17,16 @@ app.post('/uploadUserBook',useMulter.any(),(req,res)=>{
         var dataToSend;
         // spawn new child process to call the python script
         const python = spawn('python', ['testSignLangNN.py']);
+        console.log("this is updated version ")
         // collect data from script
+        python.stdout.on('data', function(data) {
+            console.log(data.toString()); 
+        });
+        
+        python.on('exit', function(code) {
+            console.log("Exited with code " + code);
+        });
+        
         python.stdout.on('data', function (data) {
             console.log('Pipe data from python script ...');
             dataToSend = data.toString();
