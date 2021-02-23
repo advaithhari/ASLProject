@@ -90,8 +90,6 @@ image1 = resize(image1, img_width, img_height)
 #cv2.imshow("imgage 3",image3)
 
 
-cv2.waitKey(0)
-
 #save_path = "numbersSignLangNNModel4"
 save_path = "/numbersSignLangNNModel4"
 
@@ -107,4 +105,5 @@ prediction1 = saved_model.predict(tf.cast(tf.reshape(image1, [1, img_height, img
 # prediction3 = saved_model.predict(tf.cast(tf.reshape(image3, [1, img_height, img_width, num_channels]), dtype='float32'))
 # #print("FS 1 ")
 # # print(prediction3)
+print("test response stuff")
 print(prediction1)

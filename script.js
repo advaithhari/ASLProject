@@ -110,7 +110,7 @@
       canvas.width = width;
       canvas.height = height;
       console.log(video.src)
-      context.drawImage(video,0, 0, width, height);
+      context.drawImage(video,0,0, width);
       let output;
       output = canvas.toDataURL('image/jpeg'); 
       console.log(output);
