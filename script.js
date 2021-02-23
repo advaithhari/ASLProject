@@ -114,7 +114,7 @@
       let output;
       output = canvas.toDataURL('image/jpeg'); 
       console.log(output);
-      send(output,"test");
+      send(dataURItoBlob(output),"test");
       return output;
     } else {
       clearphoto();
