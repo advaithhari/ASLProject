@@ -151,7 +151,6 @@
                 }
                 xhr.onload = function(){
                     
-                    alert("sucessfully added book");
                 }
                 xhr.onerror = function () {
                     alert("error code #68, image upload failed, please report this to compsciclub@peddie.org");
