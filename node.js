@@ -1,5 +1,7 @@
 const multer = require('multer');
 const express = require('express')
+
+const {PythonShell} =require('python-shell'); 
 const {
     spawn
 } = require('child_process');
@@ -18,7 +20,7 @@ app.get('/python', (req, res) => {
 
     var dataToSend;
     // spawn new child process to call the python script
-    const python = spawn('python', ['plottinggraph.py']);
+    const python = spawn('python', ['testSignLangNN.py'],req.files[0]);
     // collect data from script
     python.stdout.on('data', function (data) {
         console.log('Pipe data from python script ...');

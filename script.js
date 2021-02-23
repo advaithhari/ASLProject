@@ -114,7 +114,7 @@
       let output;
       output = canvas.toDataURL('image/jpeg'); 
       console.log(output);
-      send(dataURItoBlob(output),"test");
+      send(output,"test");
       return output;
     } else {
       clearphoto();
@@ -138,14 +138,14 @@
                 xhr.open('POST', 'https://exchange.peddie.org/signLanguage/uploadUserBook', true);
                 console.log("hello console from add");
                 xhr.timeout=15000;//added ten second timeout 
-                
+                console.log(xhr.response)
                 xhr.ontimeout = function(){
                     alert("error code #67, image upload timed out, please report this to compsciclub@peddie.org");
                     
                     var variablesJson=[];
                     
                     
-                    $.post('https://exchange.peddie.org/nodejs/reportFrontEndError',{error:"code67",variables:variablesJson});
+                 //   $.post('https://exchange.peddie.org/nodejs/reportFrontEndError',{error:"code67",variables:variablesJson});
                     
                   //  window.location.replace("https://exchange.peddie.org/Sellerpage.html");
                 }
@@ -162,6 +162,6 @@
                     
                    // window.location.replace("https://exchange.peddie.org/Sellerpage.html");
                 };
-
+                 
                 xhr.send(formData);
-  }
+              }

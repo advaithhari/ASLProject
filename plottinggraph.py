@@ -6,6 +6,7 @@ import pathlib
 import matplotlib.pyplot as plt
 from tensorflow.keras import layers
 from tensorflow import keras
+import requests
 
 # data = pd.read_csv('sign_mnist_train.csv')
 
