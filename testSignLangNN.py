@@ -3,7 +3,6 @@ import numpy as np
 import cv2
 import os
 import pathlib
-import matplotlib.pyplot as plt
 from tensorflow.keras import layers
 from tensorflow import keras
 import sys

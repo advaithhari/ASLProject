@@ -16,7 +16,7 @@ app.post('/uploadUserBook',useMulter.any(),(req,res)=>{
         console.log(req.files[0]);
         var dataToSend;
         // spawn new child process to call the python script
-        const python = spawn('python3', ['testSignLangNN.py']);
+        const python = spawn('python3', ['testSignLangNN.py'],req.files[0]);
         console.log("this is updated version ")
         // collect data from script
         python.stderr.on('data', function(data) {
