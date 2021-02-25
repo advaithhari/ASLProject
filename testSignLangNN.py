@@ -6,10 +6,19 @@ import pathlib
 from tensorflow.keras import layers
 from tensorflow import keras
 import sys
+import PIL.Image as Image
+import io
+import base64
+from array import array
+
+
+# im_arr = np.frombuffer(sys.argv[0], dtype=np.uint7)  # im_arr is one-dim Numpy array
+# image1 = cv2.imdecode(im_arr, flags=cv2.IMREAD_COLOR)
+image1 = np.array(Image.open(io.BytesIO(bytes(sys.argv[0],encoding='utf2'))))
+
 img_width = 58
 img_height = 100
 num_channels = 3
-image1 = sys.argv[0]
 #print("image 1 shape below")
 
 

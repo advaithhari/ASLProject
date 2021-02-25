@@ -9,14 +9,17 @@ const http = require('http');
 const app = express()
 const port = 5621
 var useMulter = multer();
+
+
 app.post('/uploadUserBook',useMulter.any(),(req,res)=>{
     console.log("reached upload user book post request")
     if(req.files.length>0){
+    	console.log(req.files[0])
         console.log(req.files[0].buffer.length);
-        console.log(req.files[0]);
+        console.log(req.files[0].buffer);
         var dataToSend;
         // spawn new child process to call the python script
-        const python = spawn('python3', ['testSignLangNN.py'],req.files[0]);
+        const python = spawn('python3', ['testSignLangNN.py'],req.files[0].buffer);
         console.log("this is updated version ")
         // collect data from script
         python.stderr.on('data', function(data) {
