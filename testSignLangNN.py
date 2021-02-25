@@ -9,7 +9,7 @@ import sys
 img_width = 58
 img_height = 100
 num_channels = 3
-image1 = sys.argv[1]
+image1 = sys.argv[0]
 #print("image 1 shape below")
 
 
