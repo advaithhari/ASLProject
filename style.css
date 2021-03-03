@@ -6,7 +6,14 @@ h1 {
   padding: 20px;
   color: burlywood;
 }
-
+h2 {
+  text-align: center;
+  /*color: goldenrod */
+  font-family: Verdana;
+  font-size: 50px;
+  padding: 20px;
+  color: burlywood;
+}
 .carousel {
   width: 960px;
   margin: auto;
@@ -73,6 +80,11 @@ hr {
   display: flex;
   
 }
+#rect{
+  width: 10%;
+  height: 400px;
+  background-color:whitesmoke;
+}
 
 .column {
   flex: 25%;
@@ -80,15 +92,47 @@ hr {
   width: 33%;
   align-items: center;
 }
+.column2 {
+  flex:5%;
+  padding: 5px;
+  align-items: center;
+  margin:3%;
 
+}
 .column img {
   width: 400px;
   height: 400px;
   background-size: cover;
+}
+.column2 img {
+  width: 150px;
+  height: 150px;
+}
+.column2 p {
+  color:black;
+  font-family: Verdana;
+  font-size: 20px;
+  padding: 5px;
   
 }
+.column2 p2 {
+  color:black;
+  font-family: Verdana;
+  font-size: 15px;
+  padding: 5px;
+  
+}
+.column2 button {
+  border: none;
+  color:black;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  display: block;
+}
 .column p {
-  color:rgb(226, 207, 119);
+  color:#e2cf77;
   font-family: Verdana;
   font-size: 50px;
 }
