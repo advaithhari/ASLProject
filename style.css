@@ -2,7 +2,7 @@ h1 {
   text-align: center;
   /*color: goldenrod */
   font-family: Verdana;
-  font-size: 50px;
+  font-size: 75px;
   padding: 20px;
   color: burlywood;
 }
@@ -71,18 +71,30 @@ hr {
 
 .row {
   display: flex;
+  
 }
 
 .column {
   flex: 25%;
   padding: 5px;
   width: 33%;
+  align-items: center;
 }
 
-.img {
-  width: 100px;
-  height: 100px;
+.column img {
+  width: 400px;
+  height: 400px;
   background-size: cover;
+  
+}
+.column p {
+  color:rgb(226, 207, 119);
+  font-family: Verdana;
+  font-size: 50px;
+}
+.img-with-text {
+  text-align: center;
+  width: 33%;
 }
 
 body {
