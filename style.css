@@ -80,8 +80,17 @@ hr {
   display: flex;
   
 }
+.row2 {
+
+  justify-content:space-around
+ 
+}
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
 #rect{
-  width: 10%;
+  width: 300px;
   height: 400px;
   background-color:whitesmoke;
 }
@@ -92,12 +101,19 @@ hr {
   width: 33%;
   align-items: center;
 }
-.column2 {
+/* .column2 {
   flex:5%;
   padding: 5px;
   align-items: center;
   margin:3%;
-
+} */
+section {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  gap: 3%;
+  grid-auto-flow: column;
 }
 .column img {
   width: 400px;
@@ -120,10 +136,12 @@ hr {
   font-family: Verdana;
   font-size: 15px;
   padding: 5px;
-  
+}
+.bt{
+  padding: 25px;
 }
 .column2 button {
-  border: none;
+  border: 2px solid black;
   color:black;
   padding: 5px;
   text-align: center;
@@ -138,7 +156,6 @@ hr {
 }
 .img-with-text {
   text-align: center;
-  width: 33%;
 }
 
 body {
