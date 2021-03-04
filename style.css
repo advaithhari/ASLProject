@@ -140,7 +140,13 @@ section {
 .bt{
   padding: 25px;
 }
-
+.calligram{
+  max-width: 100%;
+  height:auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 .column2 button {
   border: 2px solid black;
   color:black;
