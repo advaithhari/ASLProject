@@ -17,11 +17,13 @@
   var video = null;
   var canvas = null;
   var startbutton = null;
+  var message = null;
 
   function startup() {
     video = document.getElementById('video');
     canvas = document.getElementById('canvas');
     startbutton = document.getElementById('startbutton');
+    message = document.getElementById('message');
 
     
 
@@ -63,6 +65,12 @@
     }, false);
 
     clearphoto();
+    
+    message.addEventListener('click', function (ev) {
+      send();
+      ev.preventDefault();
+    }, false);
+    
   }
   function dataURItoBlob(dataURI) {
     // convert base64 to raw binary data held in a string
@@ -99,6 +107,15 @@
     var data = canvas.toDataURL('image/png');
 
   }
+
+function send() {
+var link = 'mailto:agupta-22@peddie.org?subject=Customer Inquiry'
++document.getElementById('email').value
++'&body='+document.getElementById('email').value;
+window.location.href = link;
+}
+
+
 
   // Capture a photo by fetching the current contents of the video
   // and drawing it into a canvas, then converting that to a PNG
