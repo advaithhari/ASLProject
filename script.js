@@ -1,4 +1,3 @@
-
   // The width and height of the captured photo. We will set the
   // width to the value defined here, but the height will be
   // calculated based on the aspect ratio of the input stream.
@@ -18,6 +17,8 @@
   var canvas = null;
   var startbutton = null;
   var message = null;
+
+testing = document.querySelector(".getresponse")
 
   function startup() {
     video = document.getElementById('video');
@@ -55,6 +56,7 @@
         video.setAttribute('height', height);
         canvas.setAttribute('width', width);
         canvas.setAttribute('height', height);
+      
         streaming = true;
       }
     }, false);
@@ -130,6 +132,10 @@ window.location.href = link;
       canvas.height = height;
       console.log(video.src)
       context.drawImage(video,0,0, width, height);
+      context.rect(90,0,140,240);
+      context.lineWidth = "3";
+      context.strokeStyle = "red";    
+      context.stroke();
       let output;
       output = canvas.toDataURL('image/jpeg'); 
       console.log(output);
@@ -157,7 +163,7 @@ window.location.href = link;
                 xhr.open('POST', 'https://exchange.peddie.org/signLanguage/uploadUserBook', true);
                 console.log("hello console from add");
                 xhr.timeout=15000;//added ten second timeout 
-                console.log(xhr.response)
+               
                 xhr.ontimeout = function(){
                     alert("error code #67, image upload timed out, please report this to compsciclub@peddie.org");
                     
@@ -169,7 +175,11 @@ window.location.href = link;
                   //  window.location.replace("https://exchange.peddie.org/Sellerpage.html");
                 }
                 xhr.onload = function(){
-                    
+                	console.log("reached the load"); 
+                	console.log(xhr.response);
+                	testing.innerHTML = xhr.response;
+                    console.log(xhr.responseText);
+                	
                 }
                 xhr.onerror = function () {
                     alert("error code #68, image upload failed, please report this to compsciclub@peddie.org");
@@ -180,6 +190,6 @@ window.location.href = link;
                     
                    // window.location.replace("https://exchange.peddie.org/Sellerpage.html");
                 };
-                 
+              
                 xhr.send(formData);
               }
