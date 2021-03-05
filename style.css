@@ -2,11 +2,18 @@ h1 {
   text-align: center;
   /*color: goldenrod */
   font-family: Verdana;
+  font-size: 75px;
+  padding: 20px;
+  color: burlywood;
+}
+h2 {
+  text-align: center;
+  /*color: goldenrod */
+  font-family: Verdana;
   font-size: 50px;
   padding: 20px;
   color: burlywood;
 }
-
 .carousel {
   width: 960px;
   margin: auto;
@@ -71,18 +78,86 @@ hr {
 
 .row {
   display: flex;
+  
+}
+.row2 {
+
+  justify-content:space-around
+ 
+}
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+#rect{
+  width: 300px;
+  height: 400px;
+  background-color:whitesmoke;
 }
 
 .column {
   flex: 25%;
   padding: 5px;
   width: 33%;
+  align-items: center;
 }
 
-.img {
-  width: 100px;
-  height: 100px;
+section {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  gap: 3%;
+  grid-auto-flow: column;
+}
+.column img {
+  width: 400px;
+  height: 400px;
   background-size: cover;
+}
+.column2 img {
+  width: 150px;
+  height: 150px;
+}
+.column2 p {
+  color:black;
+  font-family: Verdana;
+  font-size: 20px;
+  padding: 5px;
+  
+}
+.column2 p2 {
+  color:black;
+  font-family: Verdana;
+  font-size: 15px;
+  padding: 5px;
+}
+.bt{
+  padding: 25px;
+}
+.calligram{
+  max-width: 100%;
+  height:auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.column2 button {
+  border: 2px solid black;
+  color:black;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  display: block;
+}
+.column p {
+  color:#e2cf77;
+  font-family: Verdana;
+  font-size: 50px;
+}
+.img-with-text {
+  text-align: center;
 }
 
 body {
@@ -110,4 +185,36 @@ body {
 .frame-border { 
   border:8px solid rgb(248, 211, 46); 
 
+  }
+  .grid-container {
+    display: grid;
+    grid-gap: 10px;
+    padding: 10px;
+  }
+  
+  .grid-item {
+    color:peru;
+    font-family: Verdana;
+    text-align: center;
+    padding: 10px;
+    font-size: 45px;
+  }
+  .grid-item p{
+    color: black;
+    font-family: Verdana;
+    text-align: center;
+    font-size: 20px;
+    padding:5px;
+  }
+  .item1 {
+    grid-column: 1 ;
+    grid-row: 1;
+  }
+  .item2{
+    grid-column: 2 ;
+    grid-row: 1;
+  }
+  .item3 {
+    grid-column: 3;
+    grid-row: 1 / span 2;
   }

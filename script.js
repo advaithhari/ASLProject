@@ -1,4 +1,3 @@
-
   // The width and height of the captured photo. We will set the
   // width to the value defined here, but the height will be
   // calculated based on the aspect ratio of the input stream.
@@ -17,11 +16,15 @@
   var video = null;
   var canvas = null;
   var startbutton = null;
+  var message = null;
+
+testing = document.querySelector(".getresponse")
 
   function startup() {
     video = document.getElementById('video');
     canvas = document.getElementById('canvas');
     startbutton = document.getElementById('startbutton');
+    message = document.getElementById('message');
 
     
 
@@ -53,6 +56,7 @@
         video.setAttribute('height', height);
         canvas.setAttribute('width', width);
         canvas.setAttribute('height', height);
+      
         streaming = true;
       }
     }, false);
@@ -63,6 +67,12 @@
     }, false);
 
     clearphoto();
+    
+    message.addEventListener('click', function (ev) {
+      send();
+      ev.preventDefault();
+    }, false);
+    
   }
   function dataURItoBlob(dataURI) {
     // convert base64 to raw binary data held in a string
@@ -100,6 +110,15 @@
 
   }
 
+function send() {
+var link = 'mailto:agupta-22@peddie.org?subject=Customer Inquiry'
++document.getElementById('email').value
++'&body='+document.getElementById('email').value;
+window.location.href = link;
+}
+
+
+
   // Capture a photo by fetching the current contents of the video
   // and drawing it into a canvas, then converting that to a PNG
   // format data URL. By drawing it on an offscreen canvas and then
@@ -113,6 +132,10 @@
       canvas.height = height;
       console.log(video.src)
       context.drawImage(video,0,0, width, height);
+      context.rect(90,0,140,240);
+      context.lineWidth = "3";
+      context.strokeStyle = "red";    
+      context.stroke();
       let output;
       output = canvas.toDataURL('image/jpeg'); 
       console.log(output);
@@ -140,7 +163,7 @@
                 xhr.open('POST', 'https://exchange.peddie.org/signLanguage/uploadUserBook', true);
                 console.log("hello console from add");
                 xhr.timeout=15000;//added ten second timeout 
-                console.log(xhr.response)
+               
                 xhr.ontimeout = function(){
                     alert("error code #67, image upload timed out, please report this to compsciclub@peddie.org");
                     
@@ -152,7 +175,11 @@
                   //  window.location.replace("https://exchange.peddie.org/Sellerpage.html");
                 }
                 xhr.onload = function(){
-                    
+                	console.log("reached the load"); 
+                	console.log(xhr.response);
+                	testing.innerHTML = xhr.response;
+                    console.log(xhr.responseText);
+                	
                 }
                 xhr.onerror = function () {
                     alert("error code #68, image upload failed, please report this to compsciclub@peddie.org");
@@ -163,6 +190,6 @@
                     
                    // window.location.replace("https://exchange.peddie.org/Sellerpage.html");
                 };
-                 
+              
                 xhr.send(formData);
               }
