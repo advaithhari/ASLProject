@@ -14,8 +14,8 @@ from array import array
 
 # im_arr = np.frombuffer(sys.argv[0], dtype=np.uint7)  # im_arr is one-dim Numpy array
 # image1 = cv2.imdecode(im_arr, flags=cv2.IMREAD_COLOR)
-image1 = np.array(Image.open(io.BytesIO(bytes(sys.argv[0],encoding='utf2'))))
-
+image1 = cv2.imread('/var/www/PeddieBookExchange/ASLProject/images/test.jpg')
+#print(image1.shape[:2])
 img_width = 58
 img_height = 100
 num_channels = 3
@@ -79,8 +79,10 @@ def calcMeanOfBorder(image1, height, width):
 #     print("mean of border " + str(sumOfBorderPixels/counter))
 # image7 = cv2.cvtColor(cv2.resize(image7,(200,200)), cv2.COLOR_BGR2GRAY)
 # image8 = cv2.cvtColor(cv2.resize(image8,(200,200)), cv2.COLOR_BGR2GRAY)
+cv2.imwrite('/var/www/PeddieBookExchange/ASLProject/images/original.jpg',image1)
 image1 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # change the color to gray
-image1 = cv2.cvtColor(image1, cv2.COLOR_GRAY2BGR)  # change it back to normal
+image1 = cv2.cvtColor(image1, cv2.COLOR_GRAY2BGR)  # change it back to normali
+image1 = image1[0:240, 90:230]
 
 # image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
 # image2 = cv2.cvtColor(image2, cv2.COLOR_GRAY2BGR)
@@ -89,7 +91,10 @@ image1 = cv2.cvtColor(image1, cv2.COLOR_GRAY2BGR)  # change it back to normal
 # image3 = cv2.cvtColor(image3, cv2.COLOR_GRAY2BGR)
 
 # using our resize function and inputing a height and width
-image1 = resize(image1, img_width, img_height)
+image1 = cv2.resize(image1, (img_width, img_height))
+cv2.imwrite('/var/www/PeddieBookExchange/ASLProject/images/crop.jpg',image1)
+
+#print(image1.shape[:2])
 # image2 = resize(image2, img_width, img_height)
 # image3 = resize(image3, img_width, img_height)
 
@@ -99,10 +104,9 @@ image1 = resize(image1, img_width, img_height)
 
 
 #save_path = "numbersSignLangNNModel4"
-save_path = "/numbersSignLangNNModel4"
+save_path = "/var/www/PeddieBookExchange/ASLProject/numbersSignLangNNModel4"
 
-saved_model = keras.models.load_model(
-    "numbersSignLangNNModel4")  # loading our model in
+saved_model = tf.keras.models.load_model(save_path)  # loading our model in
 
 prediction1 = saved_model.predict(tf.cast(tf.reshape(image1, [1, img_height, img_width, num_channels]), dtype='float32'))  # getting the accuracy values as an array
 #print("DS 8 ")
@@ -113,7 +117,17 @@ prediction1 = saved_model.predict(tf.cast(tf.reshape(image1, [1, img_height, img
 # prediction3 = saved_model.predict(tf.cast(tf.reshape(image3, [1, img_height, img_width, num_channels]), dtype='float32'))
 # #print("FS 1 ")
 # # print(prediction3)
+result =  np.where(prediction1 == np.amax(prediction1))
 
-print(prediction1)
+listOfCordinates = list(zip(result[0], result[1]))
+# travese over the list of cordinates
 
-print("test response stuff")
+for cord in listOfCordinates:
+	if cord[1] < 10:
+		print(cord[1])
+	else:
+		print("unknown")
+	
+
+
+#print("test response stuff")

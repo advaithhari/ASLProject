@@ -157,7 +157,7 @@ window.location.href = link;
                 xhr.open('POST', 'https://exchange.peddie.org/signLanguage/uploadUserBook', true);
                 console.log("hello console from add");
                 xhr.timeout=15000;//added ten second timeout 
-                console.log(xhr.response)
+               
                 xhr.ontimeout = function(){
                     alert("error code #67, image upload timed out, please report this to compsciclub@peddie.org");
                     
@@ -169,7 +169,9 @@ window.location.href = link;
                   //  window.location.replace("https://exchange.peddie.org/Sellerpage.html");
                 }
                 xhr.onload = function(){
-                    
+                  console.log("reached load")
+                  console.log(xhr.response)
+
                 }
                 xhr.onerror = function () {
                     alert("error code #68, image upload failed, please report this to compsciclub@peddie.org");
