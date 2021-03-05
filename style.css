@@ -18,7 +18,13 @@ h2 {
   width: 960px;
   margin: auto;
 }
-
+.bg { /* set relative picture size */
+  background-image: url("pictures/community.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .w-100 {
   width: 100% !important;
   height: 75vh;
@@ -160,7 +166,9 @@ section {
   text-align: center;
 }
 
-body {
+body,html {
+  height: 100%;
+  margin:0;
   overflow-x: hidden;
 }
 
@@ -217,4 +225,26 @@ body {
   .item3 {
     grid-column: 3;
     grid-row: 1 / span 2;
+  }
+  .left1 {
+    position: relative;
+    top: 55%;
+    left:16px;
+    width:99%;
+    word-wrap: break-word;
+    color: white;
+    font-size: 20px;
+    font-family: verdana;
+  }
+  
+  .left2 {
+    position: relative;
+    top: 56%;
+    left:16px;
+    width:99%;
+    word-wrap: break-word;
+    color:white;
+    font-size: 20px;
+    font-family: verdana;
+   
   }
