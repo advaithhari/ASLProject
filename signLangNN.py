@@ -20,12 +20,12 @@ print(data_dir)
 image_count = len(list(data_dir.glob('*/*.jpg')))
 print(image_count)
 
-data_augmentation = tf.keras.Sequential([
+data_augmentation = tf.keras.Sequential([ #add random elements to model
     layers.experimental.preprocessing.RandomFlip("horizontal_and_vertical"),
     layers.experimental.preprocessing.RandomRotation(0.2),
 ])
 
-train_ds = tf.keras.preprocessing.image_dataset_from_directory(
+train_ds = tf.keras.preprocessing.image_dataset_from_directory( # preprocess and create training dataset
     data_dir,
     labels="inferred",
     label_mode='int',
@@ -37,7 +37,7 @@ train_ds = tf.keras.preprocessing.image_dataset_from_directory(
 
 #class_names = ['A','B','C']
 
-val_ds = tf.keras.preprocessing.image_dataset_from_directory(
+val_ds = tf.keras.preprocessing.image_dataset_from_directory( #preprocess and create validation dataset
     data_dir,
     labels='inferred',
     label_mode='int',
@@ -59,6 +59,7 @@ num_classes = 11  # 0->9 and then a category for unknown.
 
 # train = train.reshape(27455,28,28,1) # originally should be 27455, 784 for single pixel, we reshape into images
 
+
 model = tf.keras.Sequential([
     # do this to normalize it 255 is the full color
     layers.experimental.preprocessing.Rescaling(1./255),
@@ -74,18 +75,26 @@ model = tf.keras.Sequential([
     layers.Flatten(),
     layers.Dense(512, activation='relu'),
     layers.Dense(num_classes, activation='softmax')
+
 ])
 
-
-model.compile(
+model.compile( #compile the model and check for accuracy
     optimizer='adam',
     loss=tf.losses.SparseCategoricalCrossentropy(from_logits=True),
     metrics=['accuracy'])
 
-model.fit(
+model.fit( # fit the model
     train_ds,
     validation_data=val_ds,
-    epochs=6,
+    epochs=6, #number of times it runs
     batch_size=batch_size
 )
-model.save("numbersSignLangNNModel4")
+model.save( #save the model
+    "numbersSignLangNNModel5.h5",
+    overwrite=True,
+    include_optimizer=True,
+    save_format= ,
+    signatures=None,
+    options=None,
+    save_traces=True,
+)

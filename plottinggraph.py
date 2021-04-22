@@ -81,36 +81,36 @@ cap = cv2.VideoCapture(0)
 #           #  print("image 1 tempI, tempJ val " + str(image1[tempI,tempJ]))
 #           #  print("sum of border pixels two val " + str(sumOfBorderPixels))
 #     return sumOfBorderPixels[0]/counter
-while(cap.isOpened()):
+while(cap.isOpened()): #open frame
     ret, frame = cap.read()
 
-    cv2.rectangle(frame, (230, 0), (468, 400), (255, 0, 0), 2)
+    cv2.rectangle(frame, (230, 0), (468, 400), (255, 0, 0), 2) # create a rectangle
     cv2.imshow('frame', frame)
-    if cv2.waitKey(1) & 0xFF == ord('e'):
+    if cv2.waitKey(1) & 0xFF == ord('e'): # take an image
         original = frame
 
         print(frame.shape[:2])
 
-        frame = cv2.cvtColor(original, cv2.COLOR_BGR2GRAY)
-        frame = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
+        frame = cv2.cvtColor(original, cv2.COLOR_BGR2GRAY) 
+        frame = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR) 
         frame = frame[0:400, 232:232*2]
 
         cv2.imshow('original', frame)
         print("hi")
 
-        frame = cv2.resize(frame, (img_width, img_height))
+        frame = cv2.resize(frame, (img_width, img_height)) # resize the frame
 
-        print("final shape : " + str(frame.shape[:2]))
+        print("final shape : " + str(frame.shape[:2]))  # print out the shape of the frame
 
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        if cv2.waitKey(1) & 0xFF == ord('q'): # exit cv2
             exit()
 
         save_path = "numbersSignLangNNModel4"
 
-        saved_model = keras.models.load_model(save_path)
+        saved_model = keras.models.load_model(save_path) # load in model
 
         prediction1 = saved_model.predict(tf.cast(tf.reshape(
-            frame, [1, img_height, img_width, num_channels]), dtype='float32'))
+            frame, [1, img_height, img_width, num_channels]), dtype='float32')) #load in parameters to run model and predict values 
         prediction1
         print(prediction1)
         # print(prediction1)
