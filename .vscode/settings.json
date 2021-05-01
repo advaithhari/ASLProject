@@ -1,3 +1,4 @@
 {
-    "maven.view": "hierarchical"
+    "maven.view": "hierarchical",
+    "liveServer.settings.port": 5501
 }

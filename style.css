@@ -188,7 +188,7 @@ body,html {
 
 .video {
   display: flex;
- flex-direction: row;
+ flex-direction: column;
 }
 .frame-border { 
   border:8px solid rgb(248, 211, 46); 
