@@ -14,7 +14,7 @@ img_height = 100
 img_width = 58
 
 
-data_dir = pathlib.Path("numbersDataset/")
+data_dir = pathlib.Path("C:/Users/ahari-22/ASLProject/newDataset")
 print(data_dir)
 
 image_count = len(list(data_dir.glob('*/*.jpg')))
@@ -86,15 +86,7 @@ model.compile( #compile the model and check for accuracy
 model.fit( # fit the model
     train_ds,
     validation_data=val_ds,
-    epochs=6, #number of times it runs
+    epochs=2, #number of times it runs
     batch_size=batch_size
 )
-model.save( #save the model
-    "numbersSignLangNNModel5.h5",
-    overwrite=True,
-    include_optimizer=True,
-    save_format= ,
-    signatures=None,
-    options=None,
-    save_traces=True,
-)
+model.save("numbersSignLangNNModel5")

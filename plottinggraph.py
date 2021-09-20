@@ -105,7 +105,7 @@ while(cap.isOpened()): #open frame
         if cv2.waitKey(1) & 0xFF == ord('q'): # exit cv2
             exit()
 
-        save_path = "numbersSignLangNNModel4"
+        save_path = "numbersSignLangNNModel5"
 
         saved_model = keras.models.load_model(save_path) # load in model
 
