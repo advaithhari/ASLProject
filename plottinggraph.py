@@ -105,10 +105,10 @@ while(cap.isOpened()): #open frame
         if cv2.waitKey(1) & 0xFF == ord('q'): # exit cv2
             exit()
 
-        save_path = "numbersSignLangNNModel5"
+        save_path = "numbersSignLangNNModel6"
 
         saved_model = keras.models.load_model(save_path) # load in model
-
+    
         prediction1 = saved_model.predict(tf.cast(tf.reshape(
             frame, [1, img_height, img_width, num_channels]), dtype='float32')) #load in parameters to run model and predict values 
         prediction1
