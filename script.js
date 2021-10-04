@@ -17,7 +17,7 @@
   var canvas = null;
   var startbutton = null;
   var message = null;
-
+//get the element
 testing = document.querySelector(".getresponse")
 
   function startup() {
@@ -133,10 +133,10 @@ window.location.href = link;
       console.log(video.src)
       context.drawImage(video,0,0, width, height);
       context.rect(90,0,140,240);
-      context.lineWidth = "3";
       context.strokeStyle = "red";    
       context.stroke();
       let output;
+      context.lineWidth = "3";
       output = canvas.toDataURL('image/jpeg'); 
       console.log(output);
       send(dataURItoBlob(output),"test");
